@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="4dp"
     tools:context=".ui.home.ProductListAdapter">
 
     <TextView
         android:id="@+id/productName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
         android:text="TextView"
         android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,6 +28,16 @@
         app:layout_constraintTop_toBottomOf="@+id/productName" />
 
     <TextView
+        android:id="@+id/stockText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Cost:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StockText" />
+
+    <TextView
         android:id="@+id/productStock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,4 +45,13 @@
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/StockText"
         app:layout_constraintTop_toTopOf="@+id/StockText" />
+
+    <TextView
+        android:id="@+id/productCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/stockText"
+        app:layout_constraintTop_toTopOf="@+id/stockText" />
 </androidx.constraintlayout.widget.ConstraintLayout>
