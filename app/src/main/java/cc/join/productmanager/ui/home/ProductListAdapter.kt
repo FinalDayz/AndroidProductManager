@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import androidx.core.view.marginBottom
 import cc.join.productmanager.models.Product
 
 
@@ -17,10 +18,11 @@ public class ProductListAdapter//public constructor
 ) : BaseAdapter() {
 
     override fun getView(position: Int, _convertView: View?, parent: ViewGroup?): View {
-        var convertView = _convertView;
+        var convertView : View? = _convertView;
         if (convertView == null) {
             convertView = LayoutInflater.from(context)
                 .inflate(R.layout.product_list_view_row_item, parent, false)
+
         }
 
         // get current item to be displayed
@@ -31,16 +33,19 @@ public class ProductListAdapter//public constructor
         // get the TextView for item name and item description
 
         // get the TextView for item name and item description
-        val textViewItemName =
+        val textViewProductName =
             convertView!!.findViewById(R.id.productName) as TextView
-        val textViewItemDescription =
+        val textViewProductStock =
             convertView.findViewById(R.id.productStock) as TextView
+        val textViewProductPrice =
+            convertView.findViewById(R.id.productCost) as TextView
 
         //sets the text for item name and item description from the current item object
 
         //sets the text for item name and item description from the current item object
-        textViewItemName.setText(currentItem.name)
-        textViewItemDescription.setText(currentItem.stock.toString())
+        textViewProductName.setText(currentItem.name)
+        textViewProductStock.setText(currentItem.stock.toString())
+        textViewProductPrice.setText("€"+currentItem.price.toString())
 
         // returns the view for the current row
 
