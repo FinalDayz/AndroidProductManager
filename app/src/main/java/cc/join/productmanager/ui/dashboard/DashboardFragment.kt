@@ -6,26 +6,34 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import cc.join.productmanager.R
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : Fragment(), DashboardPresenter.View {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var dashboardViewModel: DashboardPresenter
+    private lateinit var textView: TextView
+
+    override fun getTextView(): TextView {
+        return textView
+    }
+
+    override fun viewLifecycleOwner(): LifecycleOwner {
+        return viewLifecycleOwner
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProvider(this).get(DashboardViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+
+        textView = root.findViewById(R.id.text_dashboard)
+
+        dashboardViewModel = DashboardPresenter(this)
         return root
     }
 }

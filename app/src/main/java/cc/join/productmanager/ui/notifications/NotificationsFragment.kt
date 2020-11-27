@@ -6,26 +6,34 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import cc.join.productmanager.R
 
-class NotificationsFragment : Fragment() {
+class NotificationsFragment : Fragment(), NotificationsPresenter.View {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var notificationsPresenter: NotificationsPresenter
+    private lateinit var textView: TextView
+
+    override fun getTextView(): TextView {
+        return textView
+    }
+
+    override fun viewLifecycleOwner(): LifecycleOwner {
+        return viewLifecycleOwner
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        notificationsViewModel =
-                ViewModelProvider(this).get(NotificationsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_notifications, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+
+        textView = root.findViewById(R.id.text_notifications)
+
+        notificationsPresenter = NotificationsPresenter(this)
         return root
     }
 }
