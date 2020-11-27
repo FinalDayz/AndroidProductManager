@@ -11,11 +11,11 @@ import androidx.core.view.marginBottom
 import cc.join.productmanager.models.Product
 
 
-public class ProductListAdapter//public constructor
-    (//context
-    private var context: Context,//data source of the list adapter
-    private var products: ArrayList<Product>
+public class ProductListAdapter(
+    private var context: Context
 ) : BaseAdapter() {
+
+    var products: ArrayList<Product> = ArrayList<Product>();
 
     override fun getView(position: Int, _convertView: View?, parent: ViewGroup?): View {
         var convertView : View? = _convertView;
@@ -25,14 +25,8 @@ public class ProductListAdapter//public constructor
 
         }
 
-        // get current item to be displayed
-
-        // get current item to be displayed
         val currentItem = getItem(position) as Product
 
-        // get the TextView for item name and item description
-
-        // get the TextView for item name and item description
         val textViewProductName =
             convertView!!.findViewById(R.id.productName) as TextView
         val textViewProductStock =
@@ -40,17 +34,12 @@ public class ProductListAdapter//public constructor
         val textViewProductPrice =
             convertView.findViewById(R.id.productCost) as TextView
 
-        //sets the text for item name and item description from the current item object
-
-        //sets the text for item name and item description from the current item object
         textViewProductName.setText(currentItem.name)
         textViewProductStock.setText(currentItem.stock.toString())
         textViewProductPrice.setText("€"+currentItem.price.toString())
 
-        // returns the view for the current row
 
-        // returns the view for the current row
-        return convertView!!
+        return convertView
     }
 
     override fun getItem(position: Int): Any {
@@ -64,5 +53,4 @@ public class ProductListAdapter//public constructor
     override fun getCount(): Int {
         return products.size
     }
-
 }

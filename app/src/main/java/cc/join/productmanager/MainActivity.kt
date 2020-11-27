@@ -1,5 +1,6 @@
 package cc.join.productmanager
 
+import android.content.Context
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +11,13 @@ import androidx.navigation.ui.setupWithNavController
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        lateinit var appContext: Context
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        appContext = applicationContext
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
