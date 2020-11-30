@@ -11,8 +11,13 @@ import cc.join.productmanager.models.Product
 
 
 class ProductListAdapter(
-    private var context: Context
+    private var context: Context,
+    private val clickListener: OnClickProductInterface
 ) : BaseAdapter() {
+
+    interface OnClickProductInterface {
+        fun onClick(product: Product, view: View?)
+    }
 
     var products: ArrayList<Product> = ArrayList<Product>();
 
@@ -37,6 +42,9 @@ class ProductListAdapter(
         textViewProductStock.setText(currentItem.stock.toString())
         textViewProductPrice.setText("€"+currentItem.price.toString())
 
+        convertView.setOnClickListener {
+            clickListener.onClick(currentItem, it)
+        }
 
         return convertView
     }
@@ -52,4 +60,5 @@ class ProductListAdapter(
     override fun getCount(): Int {
         return products.size
     }
+
 }

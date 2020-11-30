@@ -18,8 +18,14 @@ class HomePresenter(private val view: View) {
 
     private var products: ArrayList<Product> = ArrayList()
     val productListAdapter: ProductListAdapter = ProductListAdapter(
-        MainActivity.appContext
+        MainActivity.appContext,
+        object: ProductListAdapter.OnClickProductInterface {
+            override fun onClick(product: Product, view: android.view.View?) {
+                println("CLICKED: " + product.toString())
+            }
+        }
     )
+
 
     private fun fetchProducts() {
         products.clear()
@@ -61,12 +67,14 @@ class HomePresenter(private val view: View) {
                     dialog.dismiss()
                     val name : String = formView.findViewById<TextView>(R.id.newProductName).text.toString()
                     val stock: Int = formView.findViewById<TextView>(R.id.newProductStock).text.toString().toInt()
-                    val price: Float = formView.findViewById<TextView>(R.id.newProductStock).text.toString().toFloat()
+                    val price: Float = formView.findViewById<TextView>(R.id.newProductPrice).text.toString().toFloat()
+                    val description: String = formView.findViewById<TextView>(R.id.newProductDescription).text.toString()
 
                     val product = Product(
                         name = name,
                         stock = stock,
-                        price = price
+                        price = price,
+                        description = description
                     )
 
                     products.add(product)
