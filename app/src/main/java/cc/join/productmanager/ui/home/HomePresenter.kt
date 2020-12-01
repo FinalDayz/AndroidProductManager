@@ -2,11 +2,13 @@ package cc.join.productmanager.ui.home
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import cc.join.productmanager.MainActivity
 import cc.join.productmanager.R
 import cc.join.productmanager.models.Product
+import cc.join.productmanager.ui.product.ProductDetailsActivity
 import com.google.gson.Gson
 
 class HomePresenter(private val view: View) {
@@ -20,12 +22,13 @@ class HomePresenter(private val view: View) {
     val productListAdapter: ProductListAdapter = ProductListAdapter(
         MainActivity.appContext,
         object: ProductListAdapter.OnClickProductInterface {
-            override fun onClick(product: Product, view: android.view.View?) {
-                println("CLICKED: " + product.toString())
+            override fun onClick(product: Product, elementView: android.view.View?) {
+                val intent = Intent(view.requireActivity(), ProductDetailsActivity::class.java)
+                intent.putExtra("PRODUCT", product)
+                view.requireActivity().startActivity(intent)
             }
         }
     )
-
 
     private fun fetchProducts() {
         products.clear()

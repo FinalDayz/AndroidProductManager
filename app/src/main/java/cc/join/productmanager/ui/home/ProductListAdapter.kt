@@ -16,7 +16,7 @@ class ProductListAdapter(
 ) : BaseAdapter() {
 
     interface OnClickProductInterface {
-        fun onClick(product: Product, view: View?)
+        fun onClick(product: Product, elementView: View?)
     }
 
     var products: ArrayList<Product> = ArrayList<Product>();

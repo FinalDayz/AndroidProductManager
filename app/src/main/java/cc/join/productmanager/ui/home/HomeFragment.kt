@@ -23,6 +23,7 @@ class HomeFragment: Fragment(), HomePresenter.View {
     ): View? {
         presenter = HomePresenter(this)
 
+
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         productListView = root.findViewById(R.id.ProductListView)
         addProductButton = root.findViewById(R.id.addButton)
